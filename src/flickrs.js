@@ -1,12 +1,5 @@
-import React from 'react';
-
-export const Gif = props => (
-    <li className="gif-wrap">
-        <img src={props.url} alt="" />
-    </li>
-);
-
 import React, { Component } from 'react';
+import { Gif } from './Gif';
 
 export default class SearchForm extends Component {
 

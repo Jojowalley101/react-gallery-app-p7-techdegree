@@ -1,5 +1,5 @@
 import React from 'react';
-import { Gif } from './flickrs';
+import { Gif } from "./Gif";
 
 function flickrList(props) {
 

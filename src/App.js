@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
-import SearchForm from './SearchForm';
-import GifList from './FlickrList';
+//import SearchForm from './SearchForm';
+import flickrList from './flickrList';
 
 class App extends Component {
 
@@ -34,18 +34,18 @@ class App extends Component {
   render() {
   return (
     <div>
-      <div className="main-header">
+       {/* <div className="main-header"> 
         <div className="inner">
           <h1 className="main-title">flickrSearch</h1>
           <SearchForm onSearch={this.performSearch} />
         </div>
-      </div>
+  </div>*/}
       <div className="main-content">
-        {
+        
           (this.state.loading)
             ? <p>Loading...</p>
             : <flickrList data={this.state.photos} />
-        }
+      
       </div>
     </div>
   );
