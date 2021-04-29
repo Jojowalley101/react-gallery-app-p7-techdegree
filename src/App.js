@@ -9,16 +9,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      pictures: []
+      pictures: [],
+      loading: true
     };
   }
   componentDidMount() {
 
     // Make a request for a user with a given ID
-    axios.fetch('https://www.flickr.com/services/api/explore/flickr.photos.search')
+    fetch('https://www.flickr.com/services/api/explore/flickr.photos.search')
       .then(response => {
         this.setState({
-          photos: response.photo.options
+          photos: response.photo.id,
+          loading: false
         });
         // handle success
         console.log(response);
@@ -31,23 +33,22 @@ class App extends Component {
   }
   render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="main-header">
+        <div className="inner">
+          <h1 className="main-title">flickrSearch</h1>
+          <SearchForm onSearch={this.performSearch} />
+        </div>
+      </div>
+      <div className="main-content">
+        {
+          (this.state.loading)
+            ? <p>Loading...</p>
+            : <flickrList data={this.state.photos} />
+        }
+      </div>
     </div>
-  )
+  );
   }  
   
 }
