@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 //import SearchForm from './SearchForm';
-import flickrList from './flickrList';
+import FlickrList from './FlickrList';
 
 class App extends Component {
 
@@ -13,45 +13,48 @@ class App extends Component {
       loading: true
     };
   }
-  componentDidMount() {
 
-    // Make a request for a user with a given ID
-    fetch('https://www.flickr.com/services/api/explore/flickr.photos.search')
-      .then(response => {
+  
+  componentDidMount() {
+    this.performSearch();
+  }
+
+  performSearch = (query = 'cats') => {
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    .then(response => {
         this.setState({
-          photos: response.photo.id,
+          pictures: response.photos.photo,
           loading: false
         });
-        // handle success
-        console.log(response);
       })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
       });
   }
+
   render() {
   return (
-    <div>
-       {/* <div className="main-header"> 
+      <div>
+        <div className="main-header">
         <div className="inner">
-          <h1 className="main-title">flickrSearch</h1>
-          <SearchForm onSearch={this.performSearch} />
-        </div>
-  </div>*/}
+        <h1 className="main-title">flickrSearch</h1>
+          <flickrs onSearch={this.performSearch} />
       <div className="main-content">
-        
+        {
           (this.state.loading)
             ? <p>Loading...</p>
-            : <flickrList data={this.state.photos} />
+            : <FlickrList data={this.state.photos} />
+        }
       
       </div>
     </div>
-  );
-  }  
-  
-}
+    </div>
+    </div>
 
+  );
+          }
+        }
+      
 export default App;
+
 

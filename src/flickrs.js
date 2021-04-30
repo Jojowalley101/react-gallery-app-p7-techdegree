@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Gif } from './Gif';
+import { Gif as flick } from './Flick';
 
 export default class SearchForm extends Component {
 
@@ -31,4 +31,4 @@ export default class SearchForm extends Component {
     }
 }
 
-export default Gif;
+export default flick;
