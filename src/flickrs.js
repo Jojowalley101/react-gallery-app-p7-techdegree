@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { Gif as flick } from './Flick';
 
-export default class SearchForm extends Component {
+export class Flickrs extends Component {
 
     state = {
-        searchText: ''
+        searchText: '',
+        pictures: []
+    }
+
+    performSearch = query => {
+        fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=cats&per_page=24&format=json&nojsoncallback=1`)
+            .then(response => {
+                this.setState({
+                    pictures: response.photos.photo
+                    //loading: true
+                });
+            })
+            .catch(error => {
+                console.log('Error fetching and parsing data', error);
+            });
     }
 
     onSearchChange = e => {
         this.setState({ searchText: e.target.value });
+        //console.log(this.state.searchText);
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.onSearch(this.state.searchText);
+        console.log(this.state.searchText);
+        this.performSearch(this.state.searchText);
+
         e.currentTarget.reset();
     }
 
@@ -31,4 +48,4 @@ export default class SearchForm extends Component {
     }
 }
 
-export default flick;
+//export default Flickrs;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Nopics(props) {
+function noPics(props) {
     return (
         <li className='no-gifs'>
             <i className="material-icons icon-gif">sentiment_very_dissatisfied</i>
@@ -8,3 +8,5 @@ function Nopics(props) {
         </li>
     );
 }
+
+export default noPics;
