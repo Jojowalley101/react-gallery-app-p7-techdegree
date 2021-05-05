@@ -8,6 +8,9 @@ import './Components/Flickr';
 import './Components/NoFlicks';
 import './Components/photoContainer';
 import './Components/notFound';
+//import photoContainer from './Components/photoContainer';
+import './Components/NavBar';
+//import notFound from './Components/notFound';
 
 export default class App extends Component {
   
@@ -77,7 +80,10 @@ export default class App extends Component {
         <div className="main-header">
           <div className="inner">
             <h1 className="main-title">FlickrSearch</h1>
-            <SearchForm />      
+            <SearchForm /> 
+            
+            <NavBar />
+               
           </div>   
         </div>    
         <div className="main-content">
