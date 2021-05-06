@@ -11,9 +11,11 @@ const FlickrList = props => {
   );
   
   return (
-    <ul className="gif-list">
-      {pics}
-    </ul> 
+    <div className="photo-container">
+      <ul>
+        {pics}
+      </ul>
+    </div> 
   );
 }
 

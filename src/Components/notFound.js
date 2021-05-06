@@ -1,5 +1,7 @@
+import React from 'react';
 
-
+const NotFound = props => {
+    return (
 <div>
 <ul>
 <li class="not-found">
@@ -8,5 +10,7 @@
 </li>
 </ul>
 </div >
+    )
+}
 
-export default notFound;
+export default NotFound;

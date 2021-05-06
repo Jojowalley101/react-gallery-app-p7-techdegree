@@ -1,3 +1,8 @@
+import React from 'react';
+
+const PhotoContainer = props => {
+    return (
+
 
 <div class="photo-container">
     <h2>Results</h2>
@@ -16,4 +21,8 @@
         </li>
         </ul>
         </div>
-export default photoContainer;
+
+    )
+}
+
+export default PhotoContainer;

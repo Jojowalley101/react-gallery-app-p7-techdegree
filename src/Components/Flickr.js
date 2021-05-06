@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Flickr = props => (
-  <li className="gif-wrap">
+  <li>
     <img src={props.url} alt=""/>
   </li>
 );

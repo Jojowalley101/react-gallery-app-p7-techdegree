@@ -3,13 +3,14 @@ import './App.css';
 import axios from 'axios';
 import SearchForm from './Components/SearchForm';
 import FlickrList from './Components/FlickrList';
-import './Components/NavBar';
-import './Components/Flickr';
-import './Components/NoFlicks';
-import './Components/photoContainer';
-import './Components/notFound';
+import NavBar from './Components/NavBar';
+import { Route, NavLink, BrowserRouter, Router } from "react-router-dom";
+import Flickr from './Components/Flickr';
+import NoFlicks from './Components/NoFlicks';
+//import PhotoContainer from './Components/PhotoContainer';
+import NotFound from './Components/NotFound';
 //import photoContainer from './Components/photoContainer';
-import './Components/NavBar';
+//import './Components/NavBar';
 //import notFound from './Components/notFound';
 
 export default class App extends Component {
@@ -20,7 +21,7 @@ export default class App extends Component {
       pics: [],
       picsOfHamsters: [],
       picsOfDogs: [],
-      picsOfZebras: []
+      picsOfSearch: []
     };
   } 
 
@@ -58,11 +59,11 @@ export default class App extends Component {
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
-    let query3 = 'zebras'
+    let query3 = ''
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=${query3}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          picsOfZebras: response.data.photos.photo
+          picsOfSearch: response.data.photos.photo
 
         });
       })
@@ -76,20 +77,16 @@ export default class App extends Component {
   render() {
     console.log(this.state.pics);
     return (
-      <div>
-        <div className="main-header">
-          <div className="inner">
-            <h1 className="main-title">FlickrSearch</h1>
+        <div className="container">
+          
+            <h1 className="main-title">Flickr Search</h1>
             <SearchForm /> 
-            
-            <NavBar />
-               
-          </div>   
-        </div>    
-        <div className="main-content">
-        </div>
-        <FlickrList pics={this.state.pics} />
-      </div>
+            <FlickrList pics={this.state.pics}>
+              <NavLink to={this.state.pics}>
+              </NavLink>
+            </FlickrList>
+
+          </div>
     );
   }
 }
