@@ -4,7 +4,7 @@ import axios from 'axios';
 import SearchForm from './Components/SearchForm';
 import FlickrList from './Components/FlickrList';
 import NavBar from './Components/NavBar';
-import { Route, NavLink, BrowserRouter, Router } from "react-router-dom";
+import { Route, NavLink, BrowserRouter, Router, Switch } from "react-router-dom";
 import Flickr from './Components/Flickr';
 import NoFlicks from './Components/NoFlicks';
 //import PhotoContainer from './Components/PhotoContainer';
@@ -21,13 +21,33 @@ export default class App extends Component {
       pics: [],
       picsOfHamsters: [],
       picsOfDogs: [],
-      picsOfSearch: []
+      picsOfSearch: [],
+      loading: true
     };
-  } 
+  }
+  
+  handleClick() {
+    FlickrList(this.state.pics);
+    console.log(FlickrList(this.state.pics));
+  }
 
-  componentDidMount() {
-    let query = 'cats'
+  
+  performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          pics: response.data.photos.photo,
+          loading: false
+
+        });
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+  }
+  componentDidMount() {
+    let query0 = 'cats'
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=${query0}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           pics: response.data.photos.photo
@@ -77,17 +97,63 @@ export default class App extends Component {
   render() {
     console.log(this.state.pics);
     return (
+      <BrowserRouter>
+      
         <div className="container">
           
             <h1 className="main-title">Flickr Search</h1>
-            <SearchForm /> 
-            <FlickrList pics={this.state.pics}>
-              <NavLink to={this.state.pics}>
-              </NavLink>
-            </FlickrList>
+            <SearchForm render={() => <FlickrList pics={this.state.pics} />}/> 
+          <NavBar />
+          <Switch>
+            {/* {
+              (this.state.loading)
+                ? <p>Loading...</p>
+                : <FlickrList pics={this.state.pics} />
+            } */}
+            <Route path='/cats' render={() => <FlickrList pics={this.state.pics} />} />
+              
+            <Route path='/dogs' render={() => <FlickrList pics={this.state.picsOfDogs} />} />
 
+            <Route path='/hamsters' render={() => <FlickrList pics={this.state.picsOfHamsters} />}/>
+            {/* {
+              (this.state.loading)
+                ? <p>Loading...</p>
+                : <FlickrList pics={this.state.pics} />
+            } */}
+         {/* <Route path='/'/> */}
+
+          <Route NotFound/> 
+            {
+              (this.state.loading)
+                ? <p>Loading...</p>
+                : <FlickrList pics={this.state.pics} />
+            }
+          </Switch>
           </div>
+      </BrowserRouter>
     );
   }
 }
 
+
+
+
+
+//only will show cats :(
+
+// render() {
+//   console.log(this.state.pics);
+//   return (
+//     <div className="container">
+
+//       <h1 className="main-title">Flickr Search</h1>
+//       <SearchForm />
+//       <FlickrList pics={this.state.pics}>
+//         <NavLink to={this.state.pics}>
+//         </NavLink>
+//       </FlickrList>
+
+//     </div>
+//   );
+// }
+// }
