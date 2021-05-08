@@ -22,6 +22,7 @@ export default class App extends Component {
       picsOfHamsters: [],
       picsOfDogs: [],
       picsOfSearch: [],
+      picsOfCats: [],
       loading: true
     };
   }
@@ -50,7 +51,7 @@ export default class App extends Component {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=16ac0a9da4a34378b0830395009fffb2&tags=${query0}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          pics: response.data.photos.photo
+          picsOfCats: response.data.photos.photo
           
         });
       })
@@ -102,19 +103,26 @@ export default class App extends Component {
         <div className="container">
           
             <h1 className="main-title">Flickr Search</h1>
-            <SearchForm render={() => <FlickrList pics={this.state.pics} />}/> 
+            <SearchForm onSearch={this.performSearch} /> 
           <NavBar />
+          {
+              (this.state.loading)
+                ? <p>Loading...</p>
+                : 
+            
           <Switch>
             {/* {
               (this.state.loading)
                 ? <p>Loading...</p>
                 : <FlickrList pics={this.state.pics} />
             } */}
-            <Route path='/cats' render={() => <FlickrList pics={this.state.pics} />} />
+            <Route path='/cats' render={() => <FlickrList pics={this.state.picsOfCats} />} />
               
             <Route path='/dogs' render={() => <FlickrList pics={this.state.picsOfDogs} />} />
 
             <Route path='/hamsters' render={() => <FlickrList pics={this.state.picsOfHamsters} />}/>
+            <Route path='/search' render={() => <FlickrList pics={this.state.pics} />} />
+
             {/* {
               (this.state.loading)
                 ? <p>Loading...</p>
@@ -123,12 +131,14 @@ export default class App extends Component {
          {/* <Route path='/'/> */}
 
           <Route NotFound/> 
-            {
+
+            {/* {
               (this.state.loading)
                 ? <p>Loading...</p>
                 : <FlickrList pics={this.state.pics} />
-            }
+            } */}
           </Switch>
+  }
           </div>
       </BrowserRouter>
     );

@@ -21,6 +21,11 @@ const FlickrList = props => {
   return (
     <div className="photo-container">
       <ul>
+        {/* {
+          this.state.pics
+          ? <p>Loading...</p>
+                : pics
+          } */}
         {pics}
       </ul>
     </div> 
