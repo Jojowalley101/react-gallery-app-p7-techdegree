@@ -105,40 +105,32 @@ export default class App extends Component {
             <h1 className="main-title">Flickr Search</h1>
             <SearchForm onSearch={this.performSearch} /> 
           <NavBar />
-          {
+          
+          <Switch>
+            
+          
+            <Route path='/cats' render={() => <FlickrList pics={this.state.picsOfCats} />} />
+
+           
+
+            <Route path='/dogs' render={() => <FlickrList pics={this.state.picsOfDogs} />} />
+  
+            <Route path='/hamsters' render={() => <FlickrList pics={this.state.picsOfHamsters} />}/>
+            {
               (this.state.loading)
                 ? <p>Loading...</p>
                 : 
-            
-          <Switch>
-            {/* {
-              (this.state.loading)
-                ? <p>Loading...</p>
-                : <FlickrList pics={this.state.pics} />
-            } */}
-            <Route path='/cats' render={() => <FlickrList pics={this.state.picsOfCats} />} />
-              
-            <Route path='/dogs' render={() => <FlickrList pics={this.state.picsOfDogs} />} />
-
-            <Route path='/hamsters' render={() => <FlickrList pics={this.state.picsOfHamsters} />}/>
             <Route path='/search' render={() => <FlickrList pics={this.state.pics} />} />
 
-            {/* {
-              (this.state.loading)
-                ? <p>Loading...</p>
-                : <FlickrList pics={this.state.pics} />
-            } */}
-         {/* <Route path='/'/> */}
-
+            }
+            
           <Route NotFound/> 
+          
+           
+          
 
-            {/* {
-              (this.state.loading)
-                ? <p>Loading...</p>
-                : <FlickrList pics={this.state.pics} />
-            } */}
+            
           </Switch>
-  }
           </div>
       </BrowserRouter>
     );
