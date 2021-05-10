@@ -2,11 +2,8 @@
  * replacing the query route with whatever the search is 
  * 
 */
-import { Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React from 'react';
-import FlickrList from "./FlickrList";
-import Flickr from "./Flickr";
-import { render } from "@testing-library/react";
 
 
 
@@ -25,7 +22,7 @@ const NavBar = props => {
 
 return (
 
-<nav class="main-nav">
+<nav className="main-nav">
 
     <ul>
         <li><NavLink to='/cats'>Cats</NavLink></li>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Flickr from './Flickr';
-import { NoFlicks } from "./NoFlicks";
 import NotFound from './NotFound';
 
 const FlickrList = props => { 
