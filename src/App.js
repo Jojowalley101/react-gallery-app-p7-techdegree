@@ -5,7 +5,6 @@ import SearchForm from './Components/SearchForm';
 import FlickrList from './Components/FlickrList';
 import NavBar from './Components/NavBar';
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-//import notFound from "./Components/notFound";
 export default class App extends Component {
   
   constructor() {
